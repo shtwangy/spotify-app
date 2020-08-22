@@ -1,1 +1,13 @@
-<p>home works!</p>
+<div class="container">
+  <h3>New Release!!</h3>
+  <div class="grid">
+    <mat-card
+      class="item"
+      *ngFor="let item of newReleaseItems"
+    >
+      <img src="{{item.images[0].url}}" alt="" matCardImage>
+      <h2 class="item__name">{{item.name}}</h2>
+      <p class="item__artist" *ngIf="item.artists">{{item.artists[0].name}}</p>
+    </mat-card>
+  </div>
+</div>

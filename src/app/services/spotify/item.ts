@@ -2,13 +2,13 @@ import { Artist } from './artist';
 
 export interface Item {
   album_type: string;
-  artist: Artist[];
+  artists: Artist[];
   external_urls: {
     spotify: string
   };
   href: string;
   id: string;
-  images: any; // TODO: 型定義
+  images: {url: string}[]; // TODO: 型定義
   name: string;
   release_date: string;
   release_date_precision: string;

@@ -30,3 +30,9 @@ $spotify-app-theme: mat-light-theme($spotify-app-primary, $spotify-app-accent, $
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.container {
+  max-width: 1024px;
+  padding: 0 24px;
+  margin: 0 auto;
+}
