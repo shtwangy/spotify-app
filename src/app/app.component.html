@@ -1,2 +1,22 @@
-<header>{{title}}</header>
+<mat-toolbar color="primary">
+  <a routerLink="/" mat-button class="title">Spotify App</a>
+  <div class="spacer">
+    <form action="" class="search">
+      <input type="text" class="search__input" autocapitalize="off" [matAutocomplete]="auto">
+      <button class="search__button"><mat-icon class="mat-18">search</mat-icon></button>
+    </form>
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option>xxx</mat-option>
+      <mat-option>xxx</mat-option>
+      <mat-option>xxx</mat-option>
+      <mat-option>xxx</mat-option>
+    </mat-autocomplete>
+  </div>
+</mat-toolbar>
+
 <router-outlet></router-outlet>
+
+<mat-toolbar>
+  <div class="spacer"></div>
+  <div><span>&copy; shtwangy</span></div>
+</mat-toolbar>
