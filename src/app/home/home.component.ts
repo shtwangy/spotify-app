@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SpotifyService} from '../services/spotify/spotify.service';
 import {NewReleaseItems} from '../services/spotify/new-release-items';
 import { Item } from '../services/spotify/item';
+import {PlaylistItem} from '../services/spotify/playlist-item';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +11,8 @@ import { Item } from '../services/spotify/item';
 })
 export class HomeComponent implements OnInit {
   newReleaseItems: Item[];
+  featurePlaylists: PlaylistItem[];
+  playlistMessage: string;
 
   constructor(
     private spotifyService: SpotifyService
@@ -24,6 +27,13 @@ export class HomeComponent implements OnInit {
             console.log(data);
             this.newReleaseItems = data.albums.items;
           });
+        this.spotifyService.getFeaturePlaylist().subscribe(
+          data => {
+            console.log(data);
+            this.featurePlaylists = data.playlists.items;
+            this.playlistMessage = data.message;
+          }
+        );
       }
     );
   }

@@ -10,4 +10,15 @@
       <p class="item__artist" *ngIf="item.artists">{{item.artists[0].name}}</p>
     </mat-card>
   </div>
+  <h3>Feature Playlist</h3>
+  <h4>{{playlistMessage}}</h4>
+  <div class="grid">
+    <mat-card
+      class="item"
+      *ngFor="let playlist of featurePlaylists"
+    >
+      <img src="{{playlist.images[0].url}}" alt="" matCardImage>
+      <h2 class="item__name">{{playlist.name}}</h2>
+    </mat-card>
+  </div>
 </div>

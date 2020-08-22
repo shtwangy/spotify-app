@@ -7,6 +7,7 @@ import { environment } from '../../../environments/environment';
 
 import { Auth } from '../../share/auth';
 import { NewReleaseItems } from './new-release-items';
+import {Playlists} from './playlists';
 
 @Injectable({
   providedIn: 'root'
@@ -37,17 +38,28 @@ export class SpotifyService {
     );
   }
 
-  getNewRelease(): Observable<NewReleaseItems> {
-    const options = {
+  private getAuthOption() {
+    return {
       headers: new HttpHeaders(
         {
           Authorization: `Bearer ${this.accessToken}`
         }
       )
     };
-    return this.http.get<NewReleaseItems>('https://api.spotify.com/v1/browse/new-releases', options).pipe(
-      catchError(this.handleError<NewReleaseItems>(`Get New Release Failed`))
-    );
+  }
+
+  getNewRelease(): Observable<NewReleaseItems> {
+    return this.http.get<NewReleaseItems>('https://api.spotify.com/v1/browse/new-releases', this.getAuthOption())
+      .pipe(
+        catchError(this.handleError<NewReleaseItems>(`Get New Release Failed`))
+      );
+  }
+
+  getFeaturePlaylist(): Observable<Playlists> {
+    return this.http.get<Playlists>('https://api.spotify.com/v1/browse/featured-playlists', this.getAuthOption())
+      .pipe(
+        catchError(this.handleError<Playlists>(`Get Feature Playlists Failed`))
+      );
   }
 
   // TODO: 全体で共通化する
