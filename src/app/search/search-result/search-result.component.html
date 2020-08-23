@@ -1,1 +1,27 @@
-<p>search-result works!</p>
+<div class="container">
+  <h1>検索結果</h1>
+  <div class="type-container">
+    <h3>ARTIST</h3>
+    <div class="grid">
+      <mat-card
+        class="item"
+        *ngFor="let artist of artists"
+      >
+        <img src="{{artist.imgUrl}}" alt="" matCardImage>
+        <h2 class="item__name">{{artist.name}}</h2>
+      </mat-card>
+    </div>
+  </div>
+  <div class="type-container">
+    <h3 style="margin-top: 50px">ALBUM</h3>
+    <div class="grid">
+      <mat-card
+        class="item"
+        *ngFor="let album of albums"
+      >
+        <img src="{{album.imgUrl}}" alt="" matCardImage>
+        <h2 class="item__name">{{album.name}}</h2>
+      </mat-card>
+    </div>
+  </div>
+</div>

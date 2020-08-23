@@ -6,6 +6,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search-result.component.scss']
 })
 export class SearchResultComponent implements OnInit {
+  artists = [
+    {name: 'Hoge Band', imgUrl: 'https://placehold.it/400x300'},
+    {name: 'Hoge Band', imgUrl: 'https://placehold.it/400x300'},
+    {name: 'Hoge Band', imgUrl: 'https://placehold.it/400x300'},
+    {name: 'Hoge Band', imgUrl: 'https://placehold.it/400x300'}
+    ];
+  albums = [
+    {name: 'fuga', imgUrl: 'https://placehold.it/400x300'},
+    {name: 'fuga', imgUrl: 'https://placehold.it/400x300'},
+    {name: 'fuga', imgUrl: 'https://placehold.it/400x300'},
+    {name: 'fuga', imgUrl: 'https://placehold.it/400x300'}
+    ];
 
   constructor() { }
 
