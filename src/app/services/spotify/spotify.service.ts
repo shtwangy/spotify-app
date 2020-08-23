@@ -17,6 +17,7 @@ export class SpotifyService {
   private clientSecret: string = environment.spotify.clientSecret;
 
   private accessToken: string;
+  public authorized = false;
 
   constructor(
     private http: HttpClient
@@ -33,7 +34,10 @@ export class SpotifyService {
     };
     const body = new HttpParams().set('grant_type', 'client_credentials');
     return this.http.post<Auth>('https://accounts.spotify.com/api/token', body, options).pipe(
-      tap(res => this.accessToken = res.access_token),
+      tap(res => {
+        this.accessToken = res.access_token;
+        this.authorized = true;
+      }),
       catchError(this.handleError<Auth>(`Auth Failed`))
     );
   }
@@ -57,6 +61,15 @@ export class SpotifyService {
 
   getFeaturePlaylist(): Observable<Playlists> {
     return this.http.get<Playlists>('https://api.spotify.com/v1/browse/featured-playlists', this.getAuthOption())
+      .pipe(
+        catchError(this.handleError<Playlists>(`Get Feature Playlists Failed`))
+      );
+  }
+
+  search(word: string, type = 'artist'): Observable<any> {
+    const params: HttpParams = new HttpParams().set('q', word).set('type', type).set('market', 'JP');
+    const headers: HttpHeaders = new HttpHeaders().set('Authorization', `Bearer ${this.accessToken}`);
+    return this.http.get('https://api.spotify.com/v1/search', {headers, params})
       .pipe(
         catchError(this.handleError<Playlists>(`Get Feature Playlists Failed`))
       );
