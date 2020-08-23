@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {SpotifyService} from '../services/spotify/spotify.service';
-import {NewReleaseItems} from '../services/spotify/new-release-items';
 import { Item } from '../services/spotify/item';
 import {PlaylistItem} from '../services/spotify/playlist-item';
 
@@ -21,15 +20,12 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.spotifyService.getAuth().subscribe(
       res => {
-        console.log(res);
         this.spotifyService.getNewRelease().subscribe(
           data => {
-            console.log(data);
             this.newReleaseItems = data.albums.items;
           });
         this.spotifyService.getFeaturePlaylist().subscribe(
           data => {
-            console.log(data);
             this.featurePlaylists = data.playlists.items;
             this.playlistMessage = data.message;
           }
