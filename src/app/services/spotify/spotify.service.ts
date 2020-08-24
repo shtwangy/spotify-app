@@ -6,8 +6,9 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 
 import { Auth } from '../../share/auth';
-import { NewReleaseItems } from './new-release-items';
-import {Playlists} from './playlists';
+import { Albums } from './albums';
+import { Artists } from './artists';
+import { Playlists } from './playlists';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class SpotifyService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {}
 
   getAuth(): Observable<Auth> {
     const options = {
@@ -52,10 +53,10 @@ export class SpotifyService {
     };
   }
 
-  getNewRelease(): Observable<NewReleaseItems> {
-    return this.http.get<NewReleaseItems>('https://api.spotify.com/v1/browse/new-releases', this.getAuthOption())
+  getNewRelease(): Observable<Albums> {
+    return this.http.get<Albums>('https://api.spotify.com/v1/browse/new-releases', this.getAuthOption())
       .pipe(
-        catchError(this.handleError<NewReleaseItems>(`Get New Release Failed`))
+        catchError(this.handleError<Albums>(`Get New Release Failed`))
       );
   }
 
@@ -66,12 +67,21 @@ export class SpotifyService {
       );
   }
 
-  search(word: string, type = 'artist'): Observable<any> {
-    const params: HttpParams = new HttpParams().set('q', word).set('type', type).set('market', 'JP');
+  searchArtists(word: string): Observable<Artists> {
+    const params: HttpParams = new HttpParams().set('q', word).set('type', 'artist').set('market', 'JP');
     const headers: HttpHeaders = new HttpHeaders().set('Authorization', `Bearer ${this.accessToken}`);
-    return this.http.get('https://api.spotify.com/v1/search', {headers, params})
+    return this.http.get<Artists>('https://api.spotify.com/v1/search', {headers, params})
       .pipe(
-        catchError(this.handleError<Playlists>(`Get Feature Playlists Failed`))
+        catchError(this.handleError<Artists>(`Get Feature Playlists Failed`))
+      );
+  }
+
+  searchAlbums(word: string): Observable<Albums> {
+    const params: HttpParams = new HttpParams().set('q', word).set('type', 'album').set('market', 'JP');
+    const headers: HttpHeaders = new HttpHeaders().set('Authorization', `Bearer ${this.accessToken}`);
+    return this.http.get<Albums>('https://api.spotify.com/v1/search', {headers, params})
+      .pipe(
+        catchError(this.handleError<Albums>(`Get Feature Playlists Failed`))
       );
   }
 

@@ -1,9 +1,9 @@
-import { Item } from './item';
+import { Artist } from './artist';
 
-export interface NewReleaseItems {
-  albums: {
+export interface Artists {
+  artists: {
     href: string,
-    items: Item[],
+    items: Artist[],
     limit: number,
     next: string,
     offset: number,

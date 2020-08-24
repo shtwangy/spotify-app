@@ -1,6 +1,6 @@
 import { Artist } from './artist';
 
-export interface Item {
+export interface Album {
   album_type: string;
   artists: Artist[];
   external_urls: {
