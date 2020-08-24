@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SearchResultComponent } from './search-result/search-result.component';
 
 const routes: Routes = [
-  { path: 'result', component: SearchResultComponent }
+  { path: ':word/result', component: SearchResultComponent }
 ];
 
 @NgModule({
