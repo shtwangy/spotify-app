@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>検索結果</h1>
+  <h1>Search Result</h1>
   <div class="type-container">
     <h3>ARTIST</h3>
     <div class="grid">
@@ -7,7 +7,7 @@
         class="item"
         *ngFor="let artist of artists"
       >
-        <img src="{{artist.imgUrl}}" alt="" matCardImage>
+        <img src="{{artist.images.length ? artist.images[0].url : 'https://placehold.it/244x244'}}" alt="" matCardImage>
         <h2 class="item__name">{{artist.name}}</h2>
       </mat-card>
     </div>
@@ -19,8 +19,9 @@
         class="item"
         *ngFor="let album of albums"
       >
-        <img src="{{album.imgUrl}}" alt="" matCardImage>
+        <img src="{{album.images.length ? album.images[0].url : 'https://placehold.it/244x244'}}" alt="" matCardImage>
         <h2 class="item__name">{{album.name}}</h2>
+        <p class="item__artist" *ngIf="album.artists">{{album.artists[0].name}}</p>
       </mat-card>
     </div>
   </div>

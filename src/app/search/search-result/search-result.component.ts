@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { SpotifyService } from '../../services/spotify/spotify.service';
+import { Artist } from '../../services/spotify/artist';
+import { Album } from '../../services/spotify/album';
 
 @Component({
   selector: 'app-search-result',
@@ -6,22 +11,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search-result.component.scss']
 })
 export class SearchResultComponent implements OnInit {
-  artists = [
-    {name: 'Hoge Band', imgUrl: 'https://placehold.it/400x300'},
-    {name: 'Hoge Band', imgUrl: 'https://placehold.it/400x300'},
-    {name: 'Hoge Band', imgUrl: 'https://placehold.it/400x300'},
-    {name: 'Hoge Band', imgUrl: 'https://placehold.it/400x300'}
-    ];
-  albums = [
-    {name: 'fuga', imgUrl: 'https://placehold.it/400x300'},
-    {name: 'fuga', imgUrl: 'https://placehold.it/400x300'},
-    {name: 'fuga', imgUrl: 'https://placehold.it/400x300'},
-    {name: 'fuga', imgUrl: 'https://placehold.it/400x300'}
-    ];
+  artists: Artist[] = [];
+  albums: Album[] = [];
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private location: Location,
+    private spotifyService: SpotifyService
+  ) { }
 
   ngOnInit() {
+    // TODO: 毎回getAuth呼ばなくて良いようにする
+    this.spotifyService.getAuth().subscribe(res => this.search());
+  }
+
+  search(): void {
+    const word = this.route.snapshot.paramMap.get('word');
+    this.spotifyService.searchArtists(word).subscribe(
+      res => this.artists = res.artists.items
+    );
+    this.spotifyService.searchAlbums(word).subscribe(
+      res => this.albums = res.albums.items
+    );
   }
 
 }

@@ -10,4 +10,14 @@
     margin: 0;
     font-size: 13px;
   }
+  &__artist {
+    font-size: 14px;
+    color: rgba(black, .6);
+    margin-top: 5px;
+  }
+}
+
+.mat-card-image {
+  height: 244px;
+  object-fit: cover;
 }
