@@ -4,8 +4,8 @@
   </div>
   <div>
     <form action="" class="search">
-      <input type="text" class="search__input" autocapitalize="off" [matAutocomplete]="auto">
-      <button class="search__button"><mat-icon class="mat-18">search</mat-icon></button>
+      <input type="text" class="search__input" autocapitalize="off" [matAutocomplete]="auto" [formControl]="searchWord">
+      <button class="search__button" (click)="search(searchWord.value)"><mat-icon class="mat-18">search</mat-icon></button>
     </form>
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option>xxx</mat-option>
