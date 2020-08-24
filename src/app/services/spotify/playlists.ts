@@ -1,4 +1,4 @@
-import { Playlist } from './playlist-item';
+import { Playlist } from './playlist';
 
 export interface Playlists {
   message: string;
