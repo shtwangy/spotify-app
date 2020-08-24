@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+
+import { of } from 'rxjs';
+import { switchMap, map, tap, takeUntil } from 'rxjs/operators';
+
 import { SpotifyService } from '../../services/spotify/spotify.service';
 import { Artist } from '../../services/spotify/artist';
 import { Album } from '../../services/spotify/album';
@@ -10,9 +14,12 @@ import { Album } from '../../services/spotify/album';
   templateUrl: './search-result.component.html',
   styleUrls: ['./search-result.component.scss']
 })
-export class SearchResultComponent implements OnInit {
+export class SearchResultComponent implements OnInit, OnDestroy {
+  word = '';
   artists: Artist[] = [];
   albums: Album[] = [];
+
+  private readonly onDestroy$ = new EventEmitter();
 
   constructor(
     private route: ActivatedRoute,
@@ -21,18 +28,27 @@ export class SearchResultComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // TODO: 毎回getAuth呼ばなくて良いようにする
-    this.spotifyService.getAuth().subscribe(res => this.search());
+    this.search();
+  }
+
+  ngOnDestroy() {
+    this.onDestroy$.emit();
   }
 
   search(): void {
-    const word = this.route.snapshot.paramMap.get('word');
-    this.spotifyService.searchArtists(word).subscribe(
-      res => this.artists = res.artists.items
-    );
-    this.spotifyService.searchAlbums(word).subscribe(
-      res => this.albums = res.albums.items
-    );
+    this.route.paramMap
+      .pipe(
+        map(paramMap => paramMap.get('word')),
+        tap(word => this.word = word ),
+        switchMap(word =>
+          this.spotifyService.authorized ? of(null) : this.spotifyService.getAuth()
+        ),
+        switchMap(res => this.spotifyService.searchArtists(this.word)),
+        tap(res => this.artists = res.artists.items ),
+        switchMap( res => this.spotifyService.searchAlbums(this.word)),
+        tap(res => this.albums = res.albums.items ),
+        takeUntil(this.onDestroy$)
+      )
+      .subscribe();
   }
-
 }
