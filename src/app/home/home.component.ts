@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SpotifyService} from '../services/spotify/spotify.service';
-import { Item } from '../services/spotify/item';
-import {PlaylistItem} from '../services/spotify/playlist-item';
+import { Album } from '../services/spotify/album';
+import { PlaylistItem } from '../services/spotify/playlist-item';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +9,7 @@ import {PlaylistItem} from '../services/spotify/playlist-item';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  newReleaseItems: Item[];
+  newReleaseItems: Album[];
   featurePlaylists: PlaylistItem[];
   playlistMessage: string;
 
