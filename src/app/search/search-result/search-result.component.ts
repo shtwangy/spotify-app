@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 import { of } from 'rxjs';
 import { switchMap, map, tap, takeUntil } from 'rxjs/operators';
@@ -24,6 +25,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private location: Location,
+    private router: Router,
     private spotifyService: SpotifyService
   ) { }
 
@@ -50,5 +52,9 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         takeUntil(this.onDestroy$)
       )
       .subscribe();
+  }
+
+  goDetail(id: string) {
+    this.router.navigate(['/album/detail', id]);
   }
 }

@@ -18,6 +18,7 @@
       <mat-card
         class="item"
         *ngFor="let album of albums"
+        (click)="goDetail(album.id)"
       >
         <img src="{{album.images.length ? album.images[0].url : 'https://placehold.it/244x244'}}" alt="" matCardImage>
         <h2 class="item__name">{{album.name}}</h2>
