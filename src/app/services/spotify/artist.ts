@@ -8,4 +8,5 @@ export interface Artist {
   name: string;
   type: string;
   uri: string;
+  genres: string[];
 }

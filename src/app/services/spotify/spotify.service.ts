@@ -10,6 +10,7 @@ import { Albums } from './albums';
 import { Artists } from './artists';
 import { Playlists } from './playlists';
 import { Album } from './album';
+import { Artist } from './artist';
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +47,6 @@ export class SpotifyService {
 
   checkAuth(): Observable<Auth> {
     if (this.accessToken) {
-      console.log('hoge');
       return of({ access_token: this.accessToken });
     }
 
@@ -101,6 +101,15 @@ export class SpotifyService {
     return this.http.get<Album>(`https://api.spotify.com/v1/albums/${id}`, {headers, params})
       .pipe(
         catchError(this.handleError<Album>(`Get Album Failed`))
+      );
+  }
+
+  getArtist(id: string): Observable<Artist> {
+    const params: HttpParams = new HttpParams().set('market', 'JP');
+    const headers: HttpHeaders = new HttpHeaders().set('Authorization', `Bearer ${this.accessToken}`);
+    return this.http.get<Artist>(`https://api.spotify.com/v1/artists/${id}`, {headers, params})
+      .pipe(
+        catchError(this.handleError<Artist>(`Get Album Failed`))
       );
   }
 
