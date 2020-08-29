@@ -54,7 +54,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  goDetail(id: string) {
+  goAlbumDetail(id: string) {
     this.router.navigate(['/album/detail', id]);
   }
 }
