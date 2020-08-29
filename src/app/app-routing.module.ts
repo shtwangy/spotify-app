@@ -10,6 +10,10 @@ const routes: Routes = [
   {
     path: 'search',
     loadChildren: () => import('./search/search.module').then( m => m.SearchModule)
+  },
+  {
+    path: 'album',
+    loadChildren: () => import('./album/album.module').then( m => m.AlbumModule)
   }
 ];
 
