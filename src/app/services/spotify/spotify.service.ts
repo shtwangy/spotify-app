@@ -9,6 +9,7 @@ import { Auth } from '../../share/auth';
 import { Albums } from './albums';
 import { Artists } from './artists';
 import { Playlists } from './playlists';
+import { Album } from './album';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,15 @@ export class SpotifyService {
     );
   }
 
+  checkAuth(): Observable<Auth> {
+    if (this.accessToken) {
+      console.log('hoge');
+      return of({ access_token: this.accessToken });
+    }
+
+    return this.getAuth();
+  }
+
   private getAuthOption() {
     return {
       headers: new HttpHeaders(
@@ -72,7 +82,7 @@ export class SpotifyService {
     const headers: HttpHeaders = new HttpHeaders().set('Authorization', `Bearer ${this.accessToken}`);
     return this.http.get<Artists>('https://api.spotify.com/v1/search', {headers, params})
       .pipe(
-        catchError(this.handleError<Artists>(`Get Feature Playlists Failed`))
+        catchError(this.handleError<Artists>(`Search Artists Failed`))
       );
   }
 
@@ -81,7 +91,16 @@ export class SpotifyService {
     const headers: HttpHeaders = new HttpHeaders().set('Authorization', `Bearer ${this.accessToken}`);
     return this.http.get<Albums>('https://api.spotify.com/v1/search', {headers, params})
       .pipe(
-        catchError(this.handleError<Albums>(`Get Feature Playlists Failed`))
+        catchError(this.handleError<Albums>(`Search Albums Failed`))
+      );
+  }
+
+  getAlbum(id: string): Observable<Album> {
+    const params: HttpParams = new HttpParams().set('market', 'JP');
+    const headers: HttpHeaders = new HttpHeaders().set('Authorization', `Bearer ${this.accessToken}`);
+    return this.http.get<Album>(`https://api.spotify.com/v1/albums/${id}`, {headers, params})
+      .pipe(
+        catchError(this.handleError<Album>(`Get Album Failed`))
       );
   }
 
@@ -90,6 +109,7 @@ export class SpotifyService {
     return (error: any): Observable<T> => {
 
       // TODO: リモート上のロギング基盤にエラーを送信する
+      console.log(operation);
       console.error(error);
       return of(result as T);
     };
