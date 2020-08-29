@@ -1,1 +1,16 @@
-<p>artist-detail works!</p>
+<div class="container">
+  <div class="detail-card" *ngIf="artist">
+    <h3>ARTIST Detail</h3>
+    <mat-card class="item">
+      <img src="{{artist.images.length ? artist.images[0].url : 'https://placehold.it/244x244'}}" alt="" matCardImage>
+      <h2>{{artist.name}}</h2>
+      <div>
+        <h3>GENRES</h3>
+        <ul>
+          <li *ngFor="let genre of artist.genres">{{genre}}</li>
+        </ul>
+      </div>
+      <button (click)="goBack()" mat-raised-button color="primary">go back</button>
+    </mat-card>
+  </div>
+</div>
