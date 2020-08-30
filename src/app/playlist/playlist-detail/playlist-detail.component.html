@@ -5,7 +5,9 @@
       <img src="{{playlist.images.length ? playlist.images[0].url : 'https://placehold.it/244x244'}}" alt="" matCardImage>
       <h2>{{playlist.name}}</h2>
       <p>{{playlist.description}}</p>
-      <a href="https://{{playlist.uri}}"> go spotify</a>
+      <div style="margin-bottom: 10px">
+        <button (click)="goSpotifyPlaylist(playlist.uri)" mat-raised-button color="accent"> go spotify</button>
+      </div>
       <button (click)="goBack()" mat-raised-button color="primary">go back</button>
     </mat-card>
   </div>

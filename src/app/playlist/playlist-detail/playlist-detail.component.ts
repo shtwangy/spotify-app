@@ -28,4 +28,8 @@ export class PlaylistDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+
+  goSpotifyPlaylist(uri: string) {
+    window.location.href = uri;
+  }
 }
