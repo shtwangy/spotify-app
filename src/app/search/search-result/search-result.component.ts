@@ -41,9 +41,17 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         map(paramMap => paramMap.get('word')),
         tap(word => this.word = word ),
         switchMap(() => this.spotifyService.searchArtists(this.word)),
-        tap(res => this.artists = res.artists.items ),
+        tap(res => {
+          if (res) {
+            this.artists = res.artists.items;
+          }
+        }),
         switchMap(() => this.spotifyService.searchAlbums(this.word)),
-        tap(res => this.albums = res.albums.items ),
+        tap(res => {
+          if (res) {
+            this.albums = res.albums.items;
+          }
+        }),
         takeUntil(this.onDestroy$)
       )
       .subscribe();
