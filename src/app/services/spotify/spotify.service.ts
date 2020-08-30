@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 
 import { Auth } from '../../share/auth';
 import { Albums } from './albums';
-import { Artists } from './artists';
-import { Playlists } from './playlists';
 import { Album } from './album';
+import { Artists } from './artists';
 import { Artist } from './artist';
+import { Playlists } from './playlists';
+import { Playlist } from './playlist';
 
 @Injectable({
   providedIn: 'root'
@@ -110,6 +111,15 @@ export class SpotifyService {
     return this.http.get<Artist>(`https://api.spotify.com/v1/artists/${id}`, {headers, params})
       .pipe(
         catchError(this.handleError<Artist>(`Get Album Failed`))
+      );
+  }
+
+  getPlaylist(id: string): Observable<Playlist> {
+    const params: HttpParams = new HttpParams().set('market', 'JP');
+    const headers: HttpHeaders = new HttpHeaders().set('Authorization', `Bearer ${this.accessToken}`);
+    return this.http.get<Playlist>(`https://api.spotify.com/v1/playlists/${id}`, {headers, params})
+      .pipe(
+        catchError(this.handleError<Playlist>(`Get Playlist Failed`))
       );
   }
 
