@@ -7,6 +7,9 @@
       <p>{{album.artists[0].name}}</p>
       <p>RELEASE DATE: {{album.release_date}}</p>
       <p>TOTAL TRACKS: {{album.total_tracks}}</p>
+      <div style="margin-bottom: 10px">
+        <button (click)="goSpotify(album.uri)" mat-raised-button color="accent"> go spotify</button>
+      </div>
       <button (click)="goBack()" mat-raised-button color="primary">go back</button>
     </mat-card>
   </div>
