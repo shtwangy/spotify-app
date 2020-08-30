@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'artist',
     loadChildren: () => import('./artist/artist.module').then( m => m.ArtistModule)
+  },
+  {
+    path: 'playlist',
+    loadChildren: () => import('./playlist/playlist.module').then( m => m.PlaylistModule)
   }
 ];
 
