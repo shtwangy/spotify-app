@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import {catchError, tap, map} from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 
@@ -42,16 +42,18 @@ export class SpotifyService {
         this.accessToken = res.access_token;
         this.authorized = true;
       }),
-      catchError(this.handleError<Auth>(`Auth Failed`))
+      catchError(this.handleError<Auth>(`Auth Failed`, {access_token: ''}))
     );
   }
 
-  checkAuth(): Observable<Auth> {
+  checkAuth(): Observable<boolean> {
     if (this.accessToken) {
-      return of({ access_token: this.accessToken });
+      return of(true);
     }
 
-    return this.getAuth();
+    return this.getAuth().pipe(
+      map(res => !!res.access_token)
+    );
   }
 
   private getAuthOption() {
