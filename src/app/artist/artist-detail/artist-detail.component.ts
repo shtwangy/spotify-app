@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { SpotifyService } from '../../services/spotify/spotify.service';
+import { SpotifyService } from '../../core/services/spotify/spotify.service';
 
-import { Artist } from '../../services/spotify/artist';
+import { Artist } from '../../core/interfaces';
 
 @Component({
   selector: 'app-artist-detail',

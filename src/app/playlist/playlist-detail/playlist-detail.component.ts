@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SpotifyService } from '../../services/spotify/spotify.service';
-import { Playlist } from '../../services/spotify/playlist';
+import { SpotifyService } from '../../core/services/spotify/spotify.service';
+import { Playlist } from '../../core/interfaces';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 

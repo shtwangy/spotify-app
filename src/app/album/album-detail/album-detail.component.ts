@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { SpotifyService } from '../../services/spotify/spotify.service';
-import { Album } from '../../services/spotify/album';
-import {of} from 'rxjs';
-import {map, switchMap, takeUntil, tap} from 'rxjs/operators';
+import { SpotifyService } from '../../core/services/spotify/spotify.service';
+import { Album } from '../../core/interfaces';
 
 @Component({
   selector: 'app-album-detail',

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { switchMap, tap } from 'rxjs/operators';
-import { SpotifyService } from '../services/spotify/spotify.service';
-import { Album } from '../services/spotify/album';
-import { Playlist } from '../services/spotify/playlist';
+import { SpotifyService } from '../core/services/spotify/spotify.service';
+import { Album, Playlist } from '../core/interfaces';
 
 @Component({
   selector: 'app-home',

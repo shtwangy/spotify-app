@@ -3,7 +3,7 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { SpotifyService } from '../../services/spotify/spotify.service';
+import { SpotifyService } from '../services/spotify/spotify.service';
 
 @Injectable({
   providedIn: 'root'

@@ -3,12 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
-import { of } from 'rxjs';
 import { switchMap, map, tap, takeUntil } from 'rxjs/operators';
 
-import { SpotifyService } from '../../services/spotify/spotify.service';
-import { Artist } from '../../services/spotify/artist';
-import { Album } from '../../services/spotify/album';
+import { SpotifyService } from '../../core/services/spotify/spotify.service';
+import { Artist, Album } from '../../core/interfaces';
 
 @Component({
   selector: 'app-search-result',
