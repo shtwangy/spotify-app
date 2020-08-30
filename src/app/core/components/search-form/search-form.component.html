@@ -1,1 +1,31 @@
-<p>search-form works!</p>
+<form action="" class="search">
+  <input type="text" class="search__input" autocapitalize="off" [matAutocomplete]="auto" [formControl]="searchWord">
+  <button class="search__button" (click)="search(searchWord.value)">
+    <mat-icon class="mat-18">search</mat-icon>
+  </button>
+</form>
+<mat-autocomplete #auto="matAutocomplete">
+  <ng-container *ngIf="artists$ | async as artists">
+    <mat-option
+      *ngFor="let artist of artists"
+      [value]="artist.name"
+      (click)="search(artist.name)"
+    >
+      <mat-icon class="mat-18 icon">person</mat-icon>
+      <span>{{artist.name}}</span>
+      <img *ngIf="artist.images.length" src="{{artist.images[0].url}}" alt="" class="img"/>
+    </mat-option>
+  </ng-container>
+  <ng-container *ngIf="albums$ | async as albums">
+    <mat-option
+      *ngFor="let album of albums"
+      [value]="album.name"
+      (click)="search(album.name)"
+    >
+      <mat-icon class="mat-18 icon">album</mat-icon>
+      <span>{{ album.name }}</span>
+      <small class="light"> / {{ album.artists[0].name }}</small>
+      <img src="{{album.images[0].url}}" alt="" class="img"/>
+    </mat-option>
+  </ng-container>
+</mat-autocomplete>
