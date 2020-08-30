@@ -1,1 +1,12 @@
-<p>playlist-detail works!</p>
+<div class="container">
+  <div class="detail-card" *ngIf="playlist">
+    <h3>PLAYLIST Detail</h3>
+    <mat-card class="item">
+      <img src="{{playlist.images.length ? playlist.images[0].url : 'https://placehold.it/244x244'}}" alt="" matCardImage>
+      <h2>{{playlist.name}}</h2>
+      <p>{{playlist.description}}</p>
+      <a href="https://{{playlist.uri}}"> go spotify</a>
+      <button (click)="goBack()" mat-raised-button color="primary">go back</button>
+    </mat-card>
+  </div>
+</div>

@@ -1,4 +1,7 @@
 export interface Playlist {
+  id: string;
   name: string;
-  images: {url: string}[];
+  description: string;
+  images: { url: string }[];
+  uri: string;
 }
