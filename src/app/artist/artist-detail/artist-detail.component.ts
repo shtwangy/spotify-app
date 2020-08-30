@@ -22,9 +22,7 @@ export class ArtistDetailComponent implements OnInit {
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-    this.spotifyService.checkAuth().pipe(
-      switchMap(res => this.spotifyService.getArtist(id))
-    ).subscribe(
+    this.spotifyService.getArtist(id).subscribe(
       res => this.artist = res
     );
   }
