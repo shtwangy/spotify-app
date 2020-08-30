@@ -1,6 +1,6 @@
-import { Artist } from './artist';
+import { Artist } from './';
 
-export interface Album {
+export default interface Album {
   album_type: string;
   artists: Artist[];
   external_urls: {
@@ -8,7 +8,7 @@ export interface Album {
   };
   href: string;
   id: string;
-  images: {url: string}[]; // TODO: 型定義
+  images: { url: string }[];
   name: string;
   release_date: string;
   release_date_precision: string;
