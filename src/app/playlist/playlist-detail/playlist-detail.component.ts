@@ -21,10 +21,7 @@ export class PlaylistDetailComponent implements OnInit {
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     this.spotifyService.getPlaylist(id).subscribe(
-      res => {
-        this.playlist = res;
-        console.log(this.playlist);
-      }
+      res => this.playlist = res
     );
   }
 
