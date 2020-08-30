@@ -10,6 +10,9 @@
           <li *ngFor="let genre of artist.genres">{{genre}}</li>
         </ul>
       </div>
+      <div style="margin-bottom: 10px">
+        <button (click)="goSpotify(artist.uri)" mat-raised-button color="accent"> go spotify</button>
+      </div>
       <button (click)="goBack()" mat-raised-button color="primary">go back</button>
     </mat-card>
   </div>

@@ -29,4 +29,8 @@ export class ArtistDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+
+  goSpotify(uri: string) {
+    window.location.href = uri;
+  }
 }
