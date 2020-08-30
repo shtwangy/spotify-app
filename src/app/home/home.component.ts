@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { switchMap, tap } from 'rxjs/operators';
 import { SpotifyService } from '../services/spotify/spotify.service';
 import { Album } from '../services/spotify/album';
 import { Playlist } from '../services/spotify/playlist';
@@ -20,20 +21,14 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.spotifyService.getAuth().subscribe(
-      res => {
-        this.spotifyService.getNewRelease().subscribe(
-          data => {
-            this.newReleaseItems = data.albums.items;
-          });
-        this.spotifyService.getFeaturePlaylist().subscribe(
-          data => {
-            this.featurePlaylists = data.playlists.items;
-            this.playlistMessage = data.message;
-          }
-        );
-      }
-    );
+    this.spotifyService.getNewRelease().pipe(
+      tap(res => this.newReleaseItems = res.albums.items),
+      switchMap(() => this.spotifyService.getFeaturePlaylist()),
+      tap(res => {
+        this.featurePlaylists = res.playlists.items;
+        this.playlistMessage = res.message;
+      })
+    ).subscribe();
   }
 
   goAlbumDetail(id: string) {
