@@ -23,9 +23,7 @@ export class AlbumDetailComponent implements OnInit {
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-    this.spotifyService.checkAuth().pipe(
-      switchMap(res => this.spotifyService.getAlbum(id))
-    ).subscribe(
+    this.spotifyService.getAlbum(id).subscribe(
       res => this.album = res
     );
   }
