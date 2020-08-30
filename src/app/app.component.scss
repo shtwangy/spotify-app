@@ -12,3 +12,10 @@ footer {
 .title {
   font-size: 24px;
 }
+
+.header {
+  position :fixed;
+  top: 0;
+  z-index: 10;
+  opacity: 0.9;
+}
