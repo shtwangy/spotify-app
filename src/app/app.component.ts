@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +7,6 @@ import { FormControl } from '@angular/forms';
 })
 export class AppComponent {
   title = 'spotify-app';
-  searchWord = new FormControl('');
 
-  constructor(
-    private router: Router
-  ) {}
-
-  search(word: string) {
-    this.router.navigate(['/search', word, 'result']);
-  }
+  constructor() {}
 }
