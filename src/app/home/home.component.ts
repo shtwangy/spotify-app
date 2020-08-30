@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {SpotifyService} from '../services/spotify/spotify.service';
+import { Router } from '@angular/router';
+import { SpotifyService } from '../services/spotify/spotify.service';
 import { Album } from '../services/spotify/album';
 import { Playlist } from '../services/spotify/playlist';
 
@@ -14,6 +15,7 @@ export class HomeComponent implements OnInit {
   playlistMessage: string;
 
   constructor(
+    private router: Router,
     private spotifyService: SpotifyService
   ) { }
 
@@ -34,4 +36,11 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  goAlbumDetail(id: string) {
+    this.router.navigate(['/album/detail', id]);
+  }
+
+  goPlaylistDetail(id: string) {
+    this.router.navigate(['/playlist/detail', id]);
+  }
 }

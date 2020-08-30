@@ -4,6 +4,7 @@
     <mat-card
       class="item"
       *ngFor="let item of newReleaseItems"
+      (click)="goAlbumDetail(item.id)"
     >
       <img src="{{item.images[0].url}}" alt="" matCardImage>
       <h2 class="item__name">{{item.name}}</h2>
@@ -16,6 +17,7 @@
     <mat-card
       class="item"
       *ngFor="let playlist of featurePlaylists"
+      (click)="goPlaylistDetail(playlist.id)"
     >
       <img src="{{playlist.images[0].url}}" alt="" matCardImage>
       <h2 class="item__name">{{playlist.name}}</h2>
