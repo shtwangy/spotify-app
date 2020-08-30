@@ -3,15 +3,9 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import {catchError, tap, map} from 'rxjs/operators';
 
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 
-import { Auth } from '../../share/auth';
-import { Albums } from './albums';
-import { Album } from './album';
-import { Artists } from './artists';
-import { Artist } from './artist';
-import { Playlists } from './playlists';
-import { Playlist } from './playlist';
+import { SpotifyAuth, Album, Albums, Artist, Artists, Playlist, Playlists } from '../../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +21,7 @@ export class SpotifyService {
     private http: HttpClient
   ) {}
 
-  getAuth(): Observable<Auth> {
+  getAuth(): Observable<SpotifyAuth> {
     const options = {
       headers: new HttpHeaders(
         {
@@ -37,12 +31,12 @@ export class SpotifyService {
       )
     };
     const body = new HttpParams().set('grant_type', 'client_credentials');
-    return this.http.post<Auth>('https://accounts.spotify.com/api/token', body, options).pipe(
+    return this.http.post<SpotifyAuth>('https://accounts.spotify.com/api/token', body, options).pipe(
       tap(res => {
         this.accessToken = res.access_token;
         this.authorized = true;
       }),
-      catchError(this.handleError<Auth>(`Auth Failed`, {access_token: ''}))
+      catchError(this.handleError<SpotifyAuth>(`Auth Failed`, {access_token: ''}))
     );
   }
 
