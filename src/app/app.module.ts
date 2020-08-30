@@ -11,10 +11,12 @@ import { MatToolbarModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
 import { MatIconModule } from '@angular/material';
 import { MatAutocompleteModule } from '@angular/material';
+import { SearchFormComponent } from './core/components/search-form/search-form.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SearchFormComponent
   ],
   imports: [
     BrowserModule,
