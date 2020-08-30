@@ -2,7 +2,7 @@
   <div class="detail-card" *ngIf="album">
     <h3>ALBUM Detail</h3>
     <mat-card class="item">
-      <img src="{{album.images.length ? album.images[0].url : 'https://placehold.it/244x244'}}" alt="" matCardImage>
+      <img src="{{album.images.length ? album.images[0].url : 'assets/image/no_image.png'}}" alt="" matCardImage>
       <h2>{{album.name}}</h2>
       <p>{{album.artists[0].name}}</p>
       <p>RELEASE DATE: {{album.release_date}}</p>

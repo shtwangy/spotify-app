@@ -2,7 +2,7 @@
   <div class="detail-card" *ngIf="artist">
     <h3>ARTIST Detail</h3>
     <mat-card class="item">
-      <img src="{{artist.images.length ? artist.images[0].url : 'https://placehold.it/244x244'}}" alt="" matCardImage>
+      <img src="{{artist.images.length ? artist.images[0].url : 'assets/image/no_image.png'}}" alt="" matCardImage>
       <h2>{{artist.name}}</h2>
       <div>
         <h3>GENRES</h3>
